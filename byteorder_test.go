@@ -89,7 +89,7 @@ func TestGetEncoding_Hit_Utf32_LittleEndian(t *testing.T) {
 }
 
 func TestGetEncoding_Hit_Utf7_1(t *testing.T) {
-	encoding, byteOrder, err := GetEncoding(Utf7_1_BomBytes)
+	encoding, byteOrder, err := GetEncoding(Utf7_1BomBytes)
 	log.PanicIf(err)
 
 	if encoding != Utf7Encoding {
@@ -100,7 +100,7 @@ func TestGetEncoding_Hit_Utf7_1(t *testing.T) {
 }
 
 func TestGetEncoding_Hit_Utf7_2(t *testing.T) {
-	encoding, byteOrder, err := GetEncoding(Utf7_2_BomBytes)
+	encoding, byteOrder, err := GetEncoding(Utf7_2BomBytes)
 	log.PanicIf(err)
 
 	if encoding != Utf7Encoding {
@@ -111,7 +111,7 @@ func TestGetEncoding_Hit_Utf7_2(t *testing.T) {
 }
 
 func TestGetEncoding_Hit_Utf7_3(t *testing.T) {
-	encoding, byteOrder, err := GetEncoding(Utf7_3_BomBytes)
+	encoding, byteOrder, err := GetEncoding(Utf7_3BomBytes)
 	log.PanicIf(err)
 
 	if encoding != Utf7Encoding {
@@ -122,7 +122,7 @@ func TestGetEncoding_Hit_Utf7_3(t *testing.T) {
 }
 
 func TestGetEncoding_Hit_Utf7_4(t *testing.T) {
-	encoding, byteOrder, err := GetEncoding(Utf7_4_BomBytes)
+	encoding, byteOrder, err := GetEncoding(Utf7_4BomBytes)
 	log.PanicIf(err)
 
 	if encoding != Utf7Encoding {
@@ -133,7 +133,7 @@ func TestGetEncoding_Hit_Utf7_4(t *testing.T) {
 }
 
 func TestGetEncoding_Hit_Utf7_5(t *testing.T) {
-	encoding, byteOrder, err := GetEncoding(Utf7_5_BomBytes)
+	encoding, byteOrder, err := GetEncoding(Utf7_5BomBytes)
 	log.PanicIf(err)
 
 	if encoding != Utf7Encoding {

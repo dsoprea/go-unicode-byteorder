@@ -42,7 +42,7 @@ const (
 	// Utf1Encoding represents the UTF-1 encoding.
 	Utf1Encoding Encoding = iota + 1
 
-	// Utf1Encoding represents the UTF-EBCDIC encoding.
+	// UtfEbcdicEncoding represents the UTF-EBCDIC encoding.
 	UtfEbcdicEncoding Encoding = iota + 1
 
 	// ScsuEncoding represents the SCSU encoding.
@@ -102,20 +102,20 @@ var (
 	// byte-order.
 	Utf32BomBytesLittleEndian = []byte{0xFE, 0xFF, 0, 0}
 
-	// Utf7_1_BomBytes represents the UTF-7 BOM bytes (sequence 1).
-	Utf7_1_BomBytes = []byte{0x2B, 0x2F, 0x76, 0x38}
+	// Utf7_1BomBytes represents the UTF-7 BOM bytes (sequence 1).
+	Utf7_1BomBytes = []byte{0x2B, 0x2F, 0x76, 0x38}
 
-	// Utf7_2_BomBytes represents the UTF-7 BOM bytes (sequence 1).
-	Utf7_2_BomBytes = []byte{0x2B, 0x2F, 0x76, 0x39}
+	// Utf7_2BomBytes represents the UTF-7 BOM bytes (sequence 1).
+	Utf7_2BomBytes = []byte{0x2B, 0x2F, 0x76, 0x39}
 
-	// Utf7_3_BomBytes represents the UTF-7 BOM bytes (sequence 1).
-	Utf7_3_BomBytes = []byte{0x2B, 0x2F, 0x76, 0x2B}
+	// Utf7_3BomBytes represents the UTF-7 BOM bytes (sequence 1).
+	Utf7_3BomBytes = []byte{0x2B, 0x2F, 0x76, 0x2B}
 
-	// Utf7_4_BomBytes represents the UTF-7 BOM bytes (sequence 1).
-	Utf7_4_BomBytes = []byte{0x2B, 0x2F, 0x76, 0x2F}
+	// Utf7_4BomBytes represents the UTF-7 BOM bytes (sequence 1).
+	Utf7_4BomBytes = []byte{0x2B, 0x2F, 0x76, 0x2F}
 
-	// Utf7_5_BomBytes represents the UTF-7 BOM bytes (sequence 1).
-	Utf7_5_BomBytes = []byte{0x2B, 0x2F, 0x76, 0x38, 0x2D}
+	// Utf7_5BomBytes represents the UTF-7 BOM bytes (sequence 1).
+	Utf7_5BomBytes = []byte{0x2B, 0x2F, 0x76, 0x38, 0x2D}
 
 	// Utf1BomBytes represents the UTF-1 BOM bytes.
 	Utf1BomBytes = []byte{0xF7, 0x64, 0x4C}
@@ -133,13 +133,8 @@ var (
 	Gb18030BomBytes = []byte{0x84, 0x31, 0x95, 0x33}
 )
 
-// GetEncoding match the bytes against known BOM sequences, and return the
-// encoding and byte-order they represent. If not a known sequence of bytes,
-// returns ErrNotValidEncoding.
-func GetEncoding(s []byte) (encoding Encoding, byteOrder binary.ByteOrder, err error) {
-	if bytes.Equal(s, Utf8BomBytes) == true {
-		return Utf8Encoding, defaultByteOrder, nil
-	} else if bytes.Equal(s, Utf16BomBytesBigEndian) == true {
+func getEncodingWihtByteOrder(s []byte) (encoding Encoding, byteOrder binary.ByteOrder, err error) {
+	if bytes.Equal(s, Utf16BomBytesBigEndian) == true {
 		return Utf16Encoding, binary.BigEndian, nil
 	} else if bytes.Equal(s, Utf16BomBytesLittleEndian) == true {
 		return Utf16Encoding, binary.LittleEndian, nil
@@ -147,15 +142,33 @@ func GetEncoding(s []byte) (encoding Encoding, byteOrder binary.ByteOrder, err e
 		return Utf32Encoding, binary.BigEndian, nil
 	} else if bytes.Equal(s, Utf32BomBytesLittleEndian) == true {
 		return Utf32Encoding, binary.LittleEndian, nil
-	} else if bytes.Equal(s, Utf7_1_BomBytes) == true {
+	}
+
+	return 0, defaultByteOrder, ErrNotValidEncoding
+}
+
+// GetEncoding match the bytes against known BOM sequences, and return the
+// encoding and byte-order they represent. If not a known sequence of bytes,
+// returns ErrNotValidEncoding.
+func GetEncoding(s []byte) (encoding Encoding, byteOrder binary.ByteOrder, err error) {
+	// We dispatch to a second method just to break up this function and
+	// eliminate the cyclomatic complexity complaints.
+	encoding, byteOrder, err = getEncodingWihtByteOrder(s)
+	if err == nil {
+		return encoding, byteOrder, nil
+	}
+
+	if bytes.Equal(s, Utf8BomBytes) == true {
+		return Utf8Encoding, defaultByteOrder, nil
+	} else if bytes.Equal(s, Utf7_1BomBytes) == true {
 		return Utf7Encoding, defaultByteOrder, nil
-	} else if bytes.Equal(s, Utf7_2_BomBytes) == true {
+	} else if bytes.Equal(s, Utf7_2BomBytes) == true {
 		return Utf7Encoding, defaultByteOrder, nil
-	} else if bytes.Equal(s, Utf7_3_BomBytes) == true {
+	} else if bytes.Equal(s, Utf7_3BomBytes) == true {
 		return Utf7Encoding, defaultByteOrder, nil
-	} else if bytes.Equal(s, Utf7_4_BomBytes) == true {
+	} else if bytes.Equal(s, Utf7_4BomBytes) == true {
 		return Utf7Encoding, defaultByteOrder, nil
-	} else if bytes.Equal(s, Utf7_5_BomBytes) == true {
+	} else if bytes.Equal(s, Utf7_5BomBytes) == true {
 		return Utf7Encoding, defaultByteOrder, nil
 	} else if bytes.Equal(s, Utf1BomBytes) == true {
 		return Utf1Encoding, defaultByteOrder, nil
@@ -167,7 +180,7 @@ func GetEncoding(s []byte) (encoding Encoding, byteOrder binary.ByteOrder, err e
 		return Bocu1Encoding, defaultByteOrder, nil
 	} else if bytes.Equal(s, Gb18030BomBytes) == true {
 		return Gb18030Encoding, defaultByteOrder, nil
-	} else {
-		return 0, defaultByteOrder, ErrNotValidEncoding
 	}
+
+	return 0, defaultByteOrder, ErrNotValidEncoding
 }
