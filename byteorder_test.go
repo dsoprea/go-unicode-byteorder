@@ -258,3 +258,19 @@ func TestEncoding_String_Gb18030(t *testing.T) {
 		t.Fatalf("String not correct.")
 	}
 }
+
+func TestEncoding_String_Invalid(t *testing.T) {
+	defer func() {
+		errRaw := recover()
+		if errRaw == nil {
+			t.Fatalf("Expected failure for invalid encoding.")
+		}
+
+		err := errRaw.(error)
+		if err.Error() != "encoding not valid" {
+			log.Panic(err)
+		}
+	}()
+
+	Encoding(99).String()
+}
