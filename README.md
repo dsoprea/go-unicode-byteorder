@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/dsoprea/go-unicode-byteorder.svg?branch=master)](https://travis-ci.org/dsoprea/go-unicode-byteorder)
+[![Coverage Status](https://coveralls.io/repos/github/dsoprea/go-unicode-byteorder/badge.svg?branch=master)](https://coveralls.io/github/dsoprea/go-unicode-byteorder?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dsoprea/go-unicode-byteorder)](https://goreportcard.com/report/github.com/dsoprea/go-unicode-byteorder)
+[![GoDoc](https://godoc.org/github.com/dsoprea/go-unicode-byteorder?status.svg)](https://godoc.org/github.com/dsoprea/go-unicode-byteorder)
+
 # Overview
 
 This project will return the encoding associated with a sequence of Unicode
