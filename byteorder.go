@@ -15,12 +15,6 @@ var (
 	ErrNotValidEncoding = errors.New("not a valid encoding")
 )
 
-var (
-	// defaultByteOrder is the byte-order returned for encodings that do not
-	// have a byte-order (one-byte characters/runes).
-	defaultByteOrder = binary.BigEndian
-)
-
 // Encoding describes an encoding-type determined by a BOM.
 type Encoding int
 
@@ -144,7 +138,7 @@ func getEncodingWihtByteOrder(s []byte) (encoding Encoding, byteOrder binary.Byt
 		return Utf32Encoding, binary.LittleEndian, nil
 	}
 
-	return 0, defaultByteOrder, ErrNotValidEncoding
+	return 0, nil, ErrNotValidEncoding
 }
 
 // GetEncoding match the bytes against known BOM sequences, and return the
@@ -159,28 +153,28 @@ func GetEncoding(s []byte) (encoding Encoding, byteOrder binary.ByteOrder, err e
 	}
 
 	if bytes.Equal(s, Utf8BomBytes) == true {
-		return Utf8Encoding, defaultByteOrder, nil
+		return Utf8Encoding, nil, nil
 	} else if bytes.Equal(s, Utf7_1BomBytes) == true {
-		return Utf7Encoding, defaultByteOrder, nil
+		return Utf7Encoding, nil, nil
 	} else if bytes.Equal(s, Utf7_2BomBytes) == true {
-		return Utf7Encoding, defaultByteOrder, nil
+		return Utf7Encoding, nil, nil
 	} else if bytes.Equal(s, Utf7_3BomBytes) == true {
-		return Utf7Encoding, defaultByteOrder, nil
+		return Utf7Encoding, nil, nil
 	} else if bytes.Equal(s, Utf7_4BomBytes) == true {
-		return Utf7Encoding, defaultByteOrder, nil
+		return Utf7Encoding, nil, nil
 	} else if bytes.Equal(s, Utf7_5BomBytes) == true {
-		return Utf7Encoding, defaultByteOrder, nil
+		return Utf7Encoding, nil, nil
 	} else if bytes.Equal(s, Utf1BomBytes) == true {
-		return Utf1Encoding, defaultByteOrder, nil
+		return Utf1Encoding, nil, nil
 	} else if bytes.Equal(s, UtfEbcdicBomBytes) == true {
-		return UtfEbcdicEncoding, defaultByteOrder, nil
+		return UtfEbcdicEncoding, nil, nil
 	} else if bytes.Equal(s, ScsuBomBytes) == true {
-		return ScsuEncoding, defaultByteOrder, nil
+		return ScsuEncoding, nil, nil
 	} else if bytes.Equal(s, Bocu1BomBytes) == true {
-		return Bocu1Encoding, defaultByteOrder, nil
+		return Bocu1Encoding, nil, nil
 	} else if bytes.Equal(s, Gb18030BomBytes) == true {
-		return Gb18030Encoding, defaultByteOrder, nil
+		return Gb18030Encoding, nil, nil
 	}
 
-	return 0, defaultByteOrder, ErrNotValidEncoding
+	return 0, nil, ErrNotValidEncoding
 }

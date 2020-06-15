@@ -15,7 +15,7 @@ func TestGetEncoding_Hit_Utf8(t *testing.T) {
 
 	if encoding != Utf8Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -94,7 +94,7 @@ func TestGetEncoding_Hit_Utf7_1(t *testing.T) {
 
 	if encoding != Utf7Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -105,7 +105,7 @@ func TestGetEncoding_Hit_Utf7_2(t *testing.T) {
 
 	if encoding != Utf7Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -116,7 +116,7 @@ func TestGetEncoding_Hit_Utf7_3(t *testing.T) {
 
 	if encoding != Utf7Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -127,7 +127,7 @@ func TestGetEncoding_Hit_Utf7_4(t *testing.T) {
 
 	if encoding != Utf7Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -138,7 +138,7 @@ func TestGetEncoding_Hit_Utf7_5(t *testing.T) {
 
 	if encoding != Utf7Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -149,7 +149,7 @@ func TestGetEncoding_Hit_Utf1(t *testing.T) {
 
 	if encoding != Utf1Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -160,7 +160,7 @@ func TestGetEncoding_Hit_UtfEbcdic(t *testing.T) {
 
 	if encoding != UtfEbcdicEncoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -171,7 +171,7 @@ func TestGetEncoding_Hit_Scsu(t *testing.T) {
 
 	if encoding != ScsuEncoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -182,7 +182,7 @@ func TestGetEncoding_Hit_Bocu1(t *testing.T) {
 
 	if encoding != Bocu1Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
@@ -193,7 +193,7 @@ func TestGetEncoding_Hit_Gb18030(t *testing.T) {
 
 	if encoding != Gb18030Encoding {
 		t.Fatalf("Encoding not correct: (%d)", encoding)
-	} else if byteOrder != defaultByteOrder {
+	} else if byteOrder != nil {
 		t.Fatalf("Byte order not correct.")
 	}
 }
